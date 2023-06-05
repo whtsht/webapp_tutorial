@@ -3,5 +3,5 @@
 ## Getting Start
 
 ```
-flask --app src.main:app run --host 0.0.0.0
+flask --app 'src.main:create_app()' run --host 0.0.0.0
 ```

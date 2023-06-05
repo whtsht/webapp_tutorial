@@ -12,34 +12,25 @@ def index():
 
 @web.route("/add/", methods=["POST"])
 def add_post():
-    if title := request.form.get("title"):
-        if content := request.form.get("content"):
-            control.add_post(title, content)
-            return "OK"
+    data = request.json
+    title = data["title"]
+    content = data["content"]
 
-    return "ERROR"
+    control.add_post(title, content)
+    return "OK"
 
 
-@web.route("/delete", methods=["POST"])
+@web.route("/delete/", methods=["POST"])
 def delete_post():
-    if title := request.form.get("title"):
-        control.delete_post(title)
-        return "OK"
-    return "ERROR"
+    title = request.json["title"]
+    control.delete_post(title)
+    return "OK"
 
 
 @web.route("/get/", methods=["GET"])
 def get_posts():
     posts = db.session.query(Post).all()
     return jsonify([post.serialize() for post in posts])
-
-
-@web.route("/validation/", methods=["POST"])
-def validation():
-    if title := request.form.get("title"):
-        return jsonify(control.validation(title))
-
-    return jsonify(False)
 
 
 def create_app():

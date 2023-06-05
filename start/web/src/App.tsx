@@ -1,19 +1,19 @@
+import { useState } from "react";
 import Header from "./components/Header";
-import { useState, useEffect } from "react";
+import PostList from "./components/PostList";
+import AddPost from "./components/AddPost";
 
 function App() {
-    const [text, setText] = useState("");
-    useEffect(() => {
-        (async () => {
-            const response = await fetch("/web");
-            const respText = await response.text();
-            setText(respText);
-        })();
-    }, []);
+    const [open, setOpen] = useState(false);
     return (
         <>
-            <Header />
-            <h1>{text}</h1>
+            <Header
+                handleOpen={() => {
+                    setOpen(true);
+                }}
+            />
+            <PostList />
+            <AddPost open={open} handleClose={() => setOpen(false)} />
         </>
     );
 }

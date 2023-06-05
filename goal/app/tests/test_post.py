@@ -34,7 +34,7 @@ def test_index(client):
 
 
 def test_add_post(client):
-    response = client.post("/web/add/", data={"title": "夕食", "content": "カレーだった"})
+    response = client.post("/web/add/", json={"title": "夕食", "content": "カレーだった"})
     assert b"OK" in response.data
 
     posts = db.session.query(Post).all()
@@ -43,10 +43,10 @@ def test_add_post(client):
 
 
 def test_delete_post(client):
-    response = client.post("/web/add/", data={"title": "夕食", "content": "カレーだった"})
+    response = client.post("/web/add/", json={"title": "夕食", "content": "カレーだった"})
     assert b"OK" in response.data
 
-    response = client.post("/web/delete", data={"title": "夕食"})
+    response = client.post("/web/delete/", json={"title": "夕食"})
     assert b"OK" in response.data
 
     posts = db.session.query(Post).all()
@@ -54,23 +54,12 @@ def test_delete_post(client):
 
 
 def test_get_posts(client):
-    response = client.post("/web/add/", data={"title": "夕食", "content": "カレーだった"})
+    response = client.post("/web/add/", json={"title": "夕食", "content": "カレーだった"})
     assert b"OK" in response.data
 
-    response = client.post("/web/add/", data={"title": "今日", "content": "特に何もなかった"})
+    response = client.post("/web/add/", json={"title": "今日", "content": "特に何もなかった"})
     assert b"OK" in response.data
 
     response = client.get("/web/get/")
     assert response.json[0]["title"] == "夕食"
     assert response.json[1]["title"] == "今日"
-
-
-def test_validation(client):
-    response = client.post("/web/add/", data={"title": "夕食", "content": "カレーだった"})
-    assert b"OK" in response.data
-
-    response = client.post("/web/validation/", data={"title": "夕食"})
-    assert response.json == False
-
-    response = client.post("/web/validation/", data={"title": "今日"})
-    assert response.json == True
