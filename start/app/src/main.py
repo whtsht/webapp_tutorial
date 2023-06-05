@@ -2,6 +2,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/web')
 def index():
-    return 'Web App with Python Flask!'
+    return 'Web App with Flask and React!'

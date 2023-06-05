@@ -11,3 +11,9 @@ services:
     volumes:
       - ../:/app:cached
     tty: true
+    networks:
+      - my-blog
+
+networks:
+  my-blog:
+    external: true

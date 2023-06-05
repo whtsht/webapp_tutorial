@@ -15,7 +15,7 @@ RUN apt update \
     && apt-get -y install locales \
     && localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 
-RUN apt -y install curl git mecab libmecab-dev
+RUN apt -y install curl
 
 RUN curl https://clrd.ninjal.ac.jp/unidic_archive/2302/unidic-cwj-202302.zip --output unidic.zip \
     && unzip unidic.zip -d unidic \
@@ -34,5 +34,5 @@ ENV FLASK_APP 'src.server:create_dev_app()'
 
 
 RUN pip install --upgrade pip
-RUN pip install flake8 black pytest 
+RUN pip install flake8 black pytest
 RUN pip install flask line-bot-sdk Flask-SQLAlchemy Flask-APScheduler
