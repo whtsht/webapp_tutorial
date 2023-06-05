@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: app-server-container
+    container_name: app-server-container-finished
     hostname: app-server
     build:
       context: ..
