@@ -30,5 +30,6 @@ code ./start/web
 4. Webサーバーを起動する
 
 ```
+yarn install
 yarn start
 ```
