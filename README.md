@@ -17,6 +17,7 @@ code ./start/app
 
 2. アプリケーションサーバーを起動する
 
+bush
 ```
 flask --app 'src.main:create_app()' run --host 0.0.0.0
 ```
@@ -29,6 +30,7 @@ code ./start/web
 
 4. Webサーバーを起動する
 
+bush
 ```
 yarn install
 yarn start
