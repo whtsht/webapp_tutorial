@@ -35,3 +35,9 @@ bush
 yarn install
 yarn start
 ```
+
+## テストの実行
+
+```
+python3 -m pytest
+```
